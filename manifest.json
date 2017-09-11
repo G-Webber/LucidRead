@@ -6,7 +6,7 @@
     "activeTab"
   ],
   "background": {
-    "scripts": ["the_b_d.js"],
+    "scripts": ["background.js"],
     "persistent": false
   },
   "browser_action": {
