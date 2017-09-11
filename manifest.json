@@ -1,16 +1,16 @@
 {
-  "name": "Page Redder",
-  "description": "Make the current page red",
-  "version": "2.0",
+  "name": "Lucid Read",
+  "description": "Make the b's green and the d's red on the current page.",
+  "version": "1.0",
   "permissions": [
     "activeTab"
   ],
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["the_b_d.js"],
     "persistent": false
   },
   "browser_action": {
-    "default_title": "Make this page red"
+    "default_title": "read easy"
   },
-  "manifest_version": 2
+  "manifest_version": 1
 }
