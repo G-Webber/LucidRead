@@ -12,5 +12,5 @@
   "browser_action": {
     "default_title": "read easy"
   },
-  "manifest_version": 1
+  "manifest_version": 2
 }
