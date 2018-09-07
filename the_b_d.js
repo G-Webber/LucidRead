@@ -1,7 +1,7 @@
 
 var content = document.body;
-var ignore = {"style":0, "script":0, "noscript":0, "iframe":0, "object":0, "STYLE":0, "SCRIPT":0, "NOSCRIPT":0, "IFRAME":0, "OBJECT":0 }
-//console.log(textvalue)
+var ignore = {"option":0,"style":0, "button":0, "script":0, "noscript":0, "iframe":0, "object":0,"OPTION":0, "BUTTON":0, "STYLE":0, "SCRIPT":0, "NOSCRIPT":0, "IFRAME":0, "OBJECT":0 };
+console.log('gogo1')
 
 var singletons = {
 "area":0,
@@ -67,7 +67,7 @@ var singletons = {
 "PARAM":0,
 "SOURCE":0,
 "TRACK":0,
-"WBR":0}
+"WBR":0};
 
 var html_entities = {"&quot;":0,
 "&num;":0,
@@ -346,20 +346,20 @@ var html_entities = {"&quot;":0,
 "&spades;":0,
 "&clubs;":0,
 "&hearts;":0,
-"&diams;":0}
+"&diams;":0};
 
-var html = content.innerHTML
-var new_html = ""
-var brace_open = -1
-var tag_prop = 0
-var current_tags = []
-var this_tag = ""
-var d_positions = []
-var offsets = 0
-var ignorance_level = 0
-var is_entity = 0
-var is_entity_str = ""
-var not_entity_str = "" 
+var html = content.innerHTML;
+var new_html = "";
+var brace_open = -1;
+var tag_prop = 0;
+var current_tags = [];
+var this_tag = "";
+var d_positions = [];
+var offsets = 0;
+var ignorance_level = 0;
+var is_entity = 0;
+var is_entity_str = "";
+var not_entity_str = "";
 
 function isEntityChar(char1) {
   //var code, i, len;
@@ -381,11 +381,13 @@ for (var i = 0; i < html.length; i++){
     
     if (is_entity>0){
         if (is_entity > 10){ //was not an entity
-            is_entity = -1;
-            new_html += not_entity_str;
-            //console.log(not_entity_str);
+            is_entity = 0;
+           new_html += not_entity_str;
+			
+           console.log('penis' + not_entity_str);
         }
-        else if ((is_entity_str + character) in html_entities)
+        else 
+		if ((is_entity_str + character) in html_entities)
         {
             is_entity = 0;
             new_html += is_entity_str;
@@ -396,7 +398,7 @@ for (var i = 0; i < html.length; i++){
         }
     }    
     
-    if (character == '&'){
+    if (character == '&'){ // could be start of entity
         is_entity = 1;
         is_entity_str ="";
         not_entity_str = "";
