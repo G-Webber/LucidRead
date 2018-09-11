@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>LucidRead BookMarkLet</title>
+</head>
+<body>
+  <h1>LucidRead Bookmarklet</h1>
+
+  <p>
+    This is a <a href="javascript:(function(){let script=document.createElement('script');script.src='https://rawgit.com/G-Webber/LucidRead/master/the_b_d.js';document.body.appendChild(script);})();">Lucid Read</a>.
+  </p>
+  
+
+</body>
+</html>
