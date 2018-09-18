@@ -1,4 +1,5 @@
 
+
 var content = document.body;
 var ignore = {"option":0,"style":0, "button":0, "script":0, "noscript":0, "iframe":0, "object":0,"OPTION":0, "BUTTON":0, "STYLE":0, "SCRIPT":0, "NOSCRIPT":0, "IFRAME":0, "OBJECT":0 };
 console.log('gogo1')
@@ -361,6 +362,7 @@ var is_entity = 0;
 var is_entity_str = "";
 var not_entity_str = "";
 
+
 function isEntityChar(char1) {
   //var code, i, len;
     var code = char1.charCodeAt(0);
@@ -374,8 +376,9 @@ function isEntityChar(char1) {
   return true;
 }
   // account for tags that are not closable
+  
 
-for (var i = 0; i < html.length; i++){
+	for (var i = 0; i < html.length; i++){
     var change_flag =0
     character = html[i];
     
@@ -473,6 +476,5 @@ for (var i = 0; i < html.length; i++){
     }
 
 
-}
-
+	}
 document.body.innerHTML = new_html;
