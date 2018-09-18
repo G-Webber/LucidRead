@@ -1,16 +1,34 @@
 {
-  "name": "Lucid Read",
-  "description": "Make the b's green and the d's red on the current page.",
-  "version": "1.0",
-  "permissions": [
-    "activeTab"
-  ],
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+  "manifest_version": 2,
+  "name": "LucidRead",
+  "version": "0.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": ["Content.js"]
+    }
+  ],  
+  "options_page": "options.html",
+  "permissions": ["tabs","activeTab","storage","declarativeContent"],
+  "background":{
+  "scripts":["background.js"],
+  "persistent": false
   },
   "browser_action": {
-    "default_title": "read easy"
-  },
-  "manifest_version": 2
+      "default_icon": {
+        "16": "images/get_started16.png",
+        "32": "images/get_started32.png",
+        "48": "images/get_started48.png",
+        "128": "images/get_started128.png"
+      },
+      "default_popup": "popup.html"
+    },
+    "icons": {
+      "16": "images/get_started16.png",
+      "32": "images/get_started32.png",
+      "48": "images/get_started48.png",
+      "128": "images/get_started128.png"
+    }
 }
