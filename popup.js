@@ -1,16 +1,16 @@
- let changeColor = document.getElementById('Activate');
+ let Activate = document.getElementById('Activate');
  let bug = document.getElementById('Bug');
  let options = document.getElementById('Options');
 
  chrome.storage.sync.get('color', function(data) {
-    changeColor.style.backgroundColor = data.color;
-    changeColor.setAttribute('value', data.color);
+    Activate.style.backgroundColor = data.color;
+    Activate.setAttribute('value', data.color);
   });  
   let params = {
 		active : true,
 		currentWindow: true
 		}
-  changeColor.onclick = function(element) {
+  Activate.onclick = function(element) {
 	var msg = {
 		message: "user clicked!"
 	}
@@ -24,11 +24,11 @@
 	}
     
 	let color = element.target.value;
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.executeScript(
-          tabs[0].id,
-          {code: 'document.body.style.backgroundColor = "' + color + '";'});
-    });
+//    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+ //     chrome.tabs.executeScript(
+  //        tabs[0].id,
+  //        makeLucid());
+ //   });
   };
   
   bug.onclick = function(element) {

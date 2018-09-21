@@ -4,18 +4,47 @@
       <style>
         button {
           height: 30px;
-          width: 30px;
+          width: auto;
+          outline: none;
+          margin: 10px;
+        }
+		letter {
+          height: 10px;
+          width: 10px;
           outline: none;
           margin: 10px;
         }
       </style>
     </head>
     <body>
-      <div id="buttonDiv">
+      <div id="character">
+	  <p>type a letter</p>
+	  <input name="letter" id="letter" type="text" value="" maxlength="1">
+      </div>
+      <div id="Colour">
+	  <p>Click the colour bar to choose your colour<p>
+	  <input type="color" id="html5colorpicker" value="#ff0000" style="width:50%;">
+      </div>
+      <div id="buttonAddDiv">
+	  <button id = "AddChar">Add Character</button>
+      </div>
+      <div id="buttonRemoveDiv">
+	  <button id = "RemoveChar">Remove Character</button>
+      </div>
+      <div id="mySelection">
       </div>
       <div>
-        <p>Choose a different background color!</p>
+        <p>your selected characters and colors will apear here</p>
+        <p id = "para">your selected characters and colors will apear here</p>
+		
+		
+        <p> Some notes on the project: yes this page is ugly I just hacked it together for testing
+		</p>
+		<p> if the extension breaks a page please click bug, it will just send me the url that broke
+		</p>
+		<p> if the activation does not work please refresh the page and try again if it still doesn't work click bug
+		</p>
       </div>
+		<script src="options.js"></script>
     </body>
-    <script src="options.js"></script>
   </html>
