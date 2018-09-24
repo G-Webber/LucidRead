@@ -71,6 +71,9 @@ function removeChar(){
 
 chrome.storage.sync.get('myArr',function(data){
 	console.log('myArray' + data.myArr);
-	setupArr =  data.myArr;
-	document.getElementById("para").innerHTML = mySelection(setupArr);
+	if(typeof data.myArr !== "undefined")
+	{
+		setupArr =  data.myArr;
+		document.getElementById("para").innerHTML = mySelection(setupArr);
+	}
 	});
