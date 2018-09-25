@@ -1,6 +1,7 @@
-  var setupArr=[]
+var setupArr=[]
    let Activate = document.getElementById('AddChar');
    let Remove = document.getElementById('RemoveChar');
+   let letterClick = document.getElementById('letter');
   // let page = document.getElementById('buttonDiv');
   // const kButtonColors = ['#3aa757', '#e8453c', '#f9bb2d', '#4688f1'];
   // function constructOptions(kButtonColors) {
@@ -48,6 +49,9 @@ function removeChar(){
 				setupArr.splice(j, 1);
 				break;}
 	}
+}
+	letterClick.onfocus = function() {
+		letterClick.value="";
 }
 
   Activate.onclick = function() {

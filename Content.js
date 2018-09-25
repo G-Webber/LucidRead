@@ -6,8 +6,15 @@ function receiver(request, sender, sendResponse) {
   if (request.message === "user clicked!") {
 	console.log("hell yess");
 	chrome.storage.sync.get('myArr', function(data) {
-	console.log("duruing data: " + data.myArr);
-	makeLucid(data.myArr);
+	console.log("duruing data length: " + data.myArr.length);
+	if(typeof data.myArr !== "undefined" && data.myArr.length>0)
+	{
+		makeLucid(data.myArr);
+	}
+	else{
+		alert("no setting found, Please go to options page");
+		}
+	
   });
 	  
    // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {

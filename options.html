@@ -15,34 +15,37 @@
           margin: 10px;
         }
       </style>
+	<img src="images/LucidReadlogo.png" alt="LucidRead logo"style="width:30%;">
     </head>
     <body>
+	  <H1>Setup your profile here:</H1>
       <div id="character">
-	  <p>type a letter</p>
+	  <H2>Step 1: Type a letter:</H2>
 	  <input name="letter" id="letter" type="text" value="" maxlength="1">
       </div>
       <div id="Colour">
-	  <p>Click the colour bar to choose your colour<p>
-	  <input type="color" id="html5colorpicker" value="#ff0000" style="width:50%;">
+	  <H2>Step 2: Click the colour box to choose a colour:</H2>
+	  <input type="color" id="html5colorpicker" value="#ff0000" style="width:20;">
       </div>
-      <div id="buttonAddDiv">
+      <div id="buttonDiv">
+	  <H2>Step 3: Click Add Character:</H2>
 	  <button id = "AddChar">Add Character</button>
-      </div>
-      <div id="buttonRemoveDiv">
 	  <button id = "RemoveChar">Remove Character</button>
       </div>
       <div id="mySelection">
       </div>
       <div>
-        <p>your selected characters and colors will apear here</p>
-        <p id = "para">your selected characters and colors will apear here</p>
+		<H2>Step 4: See your selection here:</H2>
+        <H2 id = "para">your selected characters and colors will apear here</H2>
 		
+		<H3> Your selection is saved immediatly so when you are done you can just close this window
+		</H3>
 		
-        <p> Some notes on the project: yes this page is ugly I just hacked it together for testing
+        <p> Some notes on the project: yes this page is ugly I wanted to focus on getting something out so I can get some feedback.
 		</p>
-		<p> if the extension breaks a page please click bug, it will just send me the url that broke
+		<p> If the extension breaks a page please click bug, it will just send me the url that broke, no information about you.
 		</p>
-		<p> if the activation does not work please refresh the page and try again if it still doesn't work click bug
+		<p> if the activation does not work please refresh the page and try again if it still doesn't work click bug.
 		</p>
       </div>
 		<script src="options.js"></script>
