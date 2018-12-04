@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "LucidRead",
-  "version": "0.1",
+  "version": "0.3",
   "content_scripts": [
     {
       "matches": [
@@ -18,12 +18,13 @@
   },
   "browser_action": {
       "default_icon": {
-        "16": "images/Icon.png",
+        "16": "images/icon.png",
         "128": "images/icon_128.png"
       },
       "default_popup": "popup.html"
     },
     "icons": {
+       "16": "images/Icon.png",
       "128": "images/icon_128.png"
     }
 }

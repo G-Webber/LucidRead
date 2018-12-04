@@ -1,0 +1,15 @@
+.grid-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 1fr 3fr 1fr 3fr 1fr 1fr 1fr;
+  grid-gap: 1px 1px;
+  grid-template-areas: ". . ." ". . ." ". . ." ". . ." ". . .";
+}
+
+.Activate LucidRead { grid-area: 2 / 2 / 3 / 3; }
+
+.Settings { grid-area: 4 / 2 / 5 / 3; }
+
+.ReportBug { grid-area: 6 / 2 / 7 / 3; }
+

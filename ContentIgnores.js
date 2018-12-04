@@ -1,7 +1,205 @@
+chrome.runtime.onMessage.addListener(receiver);
+	 
+	  console.log("Content Go!")
+// Callback for when a message is received
+function receiver(request, sender, sendResponse) {
+  if (request.message === "user clicked!") {
+	console.log("hell yess");
+	chrome.storage.sync.get('myArr', function(data) {
+	console.log("duruing data length: " + data.myArr.length);
+	if(typeof data.myArr !== "undefined" && data.myArr.length>0)
+	{
+		makeLucid(data.myArr);
+	}
+	else{
+		alert("no setting found, Please go to options page");
+		}
+	
+  });
+	  
+   // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+   //   chrome.tabs.executeScript(
+    //      tabs[0].id,
+    //      {file: "the_b_d.js"});
+	//  sendResponse({farewell:"it is done!"});
+    // Do something!
+	//});
+  }
+}
 
+function isEntityChar(char1) {
+  //var code, i, len;
+    var code = char1.charCodeAt(0);
+
+    if (!(code > 47 && code < 58) && // numeric (0-9)
+        !(code > 64 && code < 91) && // upper alpha (A-Z)
+        !(code > 96 && code < 123) && // lower alpha (a-z)
+        !(code == '#')) {
+      return false;
+  }
+  return true;
+}
+function makeLucid(letterColours){
 var content = document.body;
+
+let textElements ={
+"a":0,
+"em":0,
+"strong":0,
+"small":0,
+"s":0,
+"cite":0,
+"q":0,
+"dfn":0,
+"abbr":0,
+"ruby":0, "rb":0, "rp":0, "rt":0,"rtc":0,
+"data":0,
+"time":0,
+"code":0,
+"var":0,
+"samp":0,
+"kbd":0,
+"sub":0,
+"sup":0,
+"i":0,
+"b":0,
+"u":0,
+"mark":0,
+"bdi":0,
+"bdo":0,
+"span":0,
+"br":0,
+"wbr":0,
+};
+
+let allHtml = {
+"g-header-menu":0,
+"!--":0,
+"!DOCTYPE":0, 
+"a":0,
+"abbr":0,
+"acronym":0,
+"address":0,
+"applet":0,
+"area":0,
+"article":0,
+"aside":0,
+"audio":0,
+"b":0,
+"base":0,
+"basefont":0,
+"bdi":0,
+"bdo":0,
+"big":0,
+"blockquote":0,
+"body":0,
+"br":0,
+"button":0,
+"canvas":0,
+"caption":0,
+"center":0,
+"cite":0,
+"code":0,
+"col":0,
+"colgroup":0,
+"data":0,
+"datalist":0,
+"dd":0,
+"del":0,
+"details":0,
+"dfn":0,
+"dialog":0,
+"dir":0,
+"div":0,
+"dl":0,
+"dt":0,
+"em":0,
+"embed":0,
+"fieldset":0,
+"figcaption":0,
+"figure":0,
+"font":0,
+"footer":0,
+"form":0,
+"frame":0,
+"frameset":0,
+"h1":0,
+"h2":0,
+"h3":0,
+"h4":0,
+"h5":0,
+"h6":0,
+"head":0,
+"header":0,
+"hr":0,
+"html":0,
+"i":0,
+"iframe":0,
+"img":0,
+"input":0,
+"ins":0,
+"kbd":0,
+"label":0,
+"legend":0,
+"li":0,
+"link":0,
+"main":0,
+"map":0,
+"mark":0,
+"meta":0,
+"meter":0,
+"nav":0,
+"noframes":0,
+"noscript":0,
+"object":0,
+"ol":0,
+"optgroup":0,
+"option":0,
+"output":0,
+"p":0,
+"param":0,
+"picture":0,
+"pre":0,
+"progress":0,
+"q":0,
+"rp":0,
+"rt":0,
+"ruby":0,
+"s":0,
+"samp":0,
+"script":0,
+"section":0,
+"select":0,
+"small":0,
+"source":0,
+"span":0,
+"strike":0,
+"strong":0,
+"style":0,
+"sub":0,
+"summary":0,
+"sup":0,
+"svg":0,
+"table":0,
+"tbody":0,
+"td":0,
+"template":0,
+"textarea":0,
+"tfoot":0,
+"th":0,
+"thead":0,
+"time":0,
+"title":0,
+"tr":0,
+"track":0,
+"tt":0,
+"u":0,
+"ul":0,
+"var":0,
+"video":0,
+"wbr":0};
 var ignore = {"option":0,"style":0, "button":0, "script":0, "noscript":0, "iframe":0, "object":0,"OPTION":0, "BUTTON":0, "STYLE":0, "SCRIPT":0, "NOSCRIPT":0, "IFRAME":0, "OBJECT":0 };
-console.log('gogo1')
+console.log('gogo1');
 
 var singletons = {
 "area":0,
@@ -36,22 +234,6 @@ var singletons = {
 "source":0,
 "track":0,
 "wbr":0,
-"AREA":0,
-"BASE":0,
-"BR":0,
-"COL":0,
-"COMMAND":0,
-"EMBED":0,
-"HR":0,
-"IMG":0,
-"INPUT":0,
-"KEYGEN":0,
-"LINK":0,
-"META":0,
-"PARAM":0,
-"SOURCE":0,
-"TRACK":0,
-"WBR":0,
 "AREA":0,
 "BASE":0,
 "BR":0,
@@ -357,53 +539,31 @@ var this_tag = "";
 var d_positions = [];
 var offsets = 0;
 var ignorance_level = 0;
+var textelement = 0;
 var is_entity = 0;
 var is_entity_str = "";
 var not_entity_str = "";
+var is_tag_str = "";
+var is_tag_Scritp = 0;
+var not_tag_str = "";
+let tagMax = 20;
+let popped = "";
+var htmlTagRe = /<\/?[\w\s="/.':;#-\/\?]+>/gi;
 
-var letterColours = [
-  ['b', "#00ff00"],
-  ['d', "#ff0000"],
-  ['g', "#0000ff"]
-];
-console.log("before: " + letterColours)
 
-
-chrome.storage.sync.get('myArr', function(data) {
-console.log("duruing data: " + data.myArr)
-console.log("duruing: " + letterColours)
-letterColours = data.myArr;
-console.log("duruing aft: " + letterColours)
-  });
-
-function isEntityChar(char1) {
-  //var code, i, len;
-    var code = char1.charCodeAt(0);
-
-    if (!(code > 47 && code < 58) && // numeric (0-9)
-        !(code > 64 && code < 91) && // upper alpha (A-Z)
-        !(code > 96 && code < 123) && // lower alpha (a-z)
-        !(code == '#')) {
-      return false;
-  }
-  return true;
-}
-  // account for tags that are not closable
-  
-console.log( "after: " + letterColours)
 for (var i = 0; i < html.length; i++){
-    var change_flag =0
+    var change_flag =0;
     character = html[i];
     
     if (is_entity>0){
         if (is_entity > 10){ //was not an entity
             is_entity = 0;
            new_html += not_entity_str;
-
-           //console.log('too long' + not_entity_str);
+			
+          //console.log('too long ' + not_entity_str);
         }
         else 
-if ((is_entity_str + character) in html_entities)
+		if ((is_entity_str + character) in html_entities)
         {
             is_entity = 0;
             new_html += is_entity_str;
@@ -412,44 +572,73 @@ if ((is_entity_str + character) in html_entities)
         else if (isEntityChar(character)){
             is_entity++;
         }
-    }    
+    }
     
     if (character == '&'){ // could be start of entity
         is_entity = 1;
         is_entity_str ="";
         not_entity_str = "";
     }
-        
-    if ((brace_open > -1) && (tag_prop == 0)){
-        if (character == ' '){
-            tag_prop = 1;
+
+    if ((brace_open > -1) && (tag_prop == 0)){   // we are probably in a tag not confirmed
+        if ((character == ' ')||(this_tag.substring(0, 3) == "!--")){   //the tag name is available now !!!! should stop looking for it // special case for ill formed comments 
             new_html += character;
-            continue;
+			tag_prop = 1;
+			continue;
             }
 
-        else if (character != '>')
-        this_tag+=character//proc_tag
+        else if (character != '>'){
+        this_tag += character  //proc_tag
+		}
     }
-    if (character == '>'){
-        brace_open=-1;
-        tag_prop = 0;
-        //console.log(current_tags);
+    if ((character == '>')&&(brace_open > -1)){
+        brace_open= -1;
+		tag_prop = 0;
+        console.log(current_tags);
+        console.log(is_tag_Scritp);
+		console.log(ignorance_level);
         if (this_tag[0] == '/'){
-            current_tags.pop();
-            if (this_tag.substr(1) in ignore) ignorance_level--;
-        }
-        else if ((!(this_tag[0] == '!'))&&(!(this_tag in singletons))){
+			popped = current_tags.pop();
+			if (popped.toLowerCase() == "script"){
+				is_tag_Scritp = 0;
+			}
+			//while (this_tag.substr(1) != popped){
+				if (!(popped == this_tag.substr(1))) console.log("tags don't match!!!" + popped + ",  ,/" + this_tag.substr(1));
+				if (this_tag.substr(1) in ignore) {
+				ignorance_level--;
+				}
+				else if (this_tag.substr(1) in textElements) {
+				textelement--;
+				}
+				popped = current_tags.pop();
+			//}
+		}
+        else if ((!(this_tag[0] == '!'))&&(!(this_tag in singletons))&&(is_tag_Scritp == 0)) { //(this_tag in allHtml) some seems redundand as is done when tag_prop is set
+			//if (!(this_tag in allHtml)) console.log(" not a tag :" + this_tag);
             current_tags.push(this_tag);
-            if (this_tag in ignore) ignorance_level++;
-        }
+			if (this_tag.toLowerCase() == "script") is_tag_Scritp = 1;
+            if (this_tag in ignore) {
+				ignorance_level++;
+			}
+			else if (this_tag in textElements) {
+				textelement++;
+			}
+		}
+		else {
+			// console.log(" not closeable " + this_tag)
+			// console.log("  in allHtml " + (this_tag in allHtml))
+			// console.log(" this_tag[0] == '!' " + (!(this_tag[0] == '!')))
+			// console.log("  in singletons " + (!(this_tag in singletons)))
+		}
         this_tag = "";
     }
-    else if (character == '<')
-        brace_open = i;
-    else if ( (ignorance_level == 0)&& (brace_open == -1 )){
-
+    else if (character == '<'){ //could be the start of a tag
+	this_tag = "";
+	brace_open = i; // fine as a tag cannot contaion <
+	}
+    else if ((ignorance_level == 0)&& (brace_open == -1)&& (textelement > 0)){
         for (var j = 0; j < letterColours.length; j++){
-
+			
         if (character == letterColours[j][0]){
             if (is_entity){
                 not_entity_str += "<span style=\"color: "+ letterColours[j][1]+";\">"+letterColours[j][0]+"</span>";
@@ -458,13 +647,14 @@ if ((is_entity_str + character) in html_entities)
             else{
                 new_html += "<span style=\"color: "+ letterColours[j][1]+";\">"+letterColours[j][0]+"</span>";
             }
+			//console.log(current_tags);
             d_positions.push((offsets + i));
             offsets = offsets+19;
             //console.log(d_positions);
             //console.log(i);
             change_flag = 1;
         }
-}
+		}
     }
     if (change_flag == 0){
         if (is_entity){
@@ -477,5 +667,8 @@ if ((is_entity_str + character) in html_entities)
     }
 
 
-}
+	}
 document.body.innerHTML = new_html;
+}
+
+
